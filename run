@@ -1,2 +1,2 @@
 #!/bin/bash
-gunicorn -c hello.py hello
+gunicorn -c /etc/gunicorn.d/gunicorn.conf ask.wsgi
