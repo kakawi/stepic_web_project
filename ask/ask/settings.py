@@ -19,7 +19,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = '$p2b(%dajnru1mby)nhrg=m_y++y(ab(ys(rtncqv2&lmx)0*4'
 
-# SECURITY WARNING: don't run with debug turned on in production!
+# SECURITY WARNING: don't run.sh with debug turned on in production!
 DEBUG = True
 
 TEMPLATE_DEBUG = True
@@ -62,7 +62,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'django_ask',
         'USER': 'root',
-        'PASSWORD': 'Qa4kT2e4XC',
+        'PASSWORD': 'mysql_user',
         'HOST': '127.0.0.1',
         'PORT': '3306',
     }
