@@ -8,12 +8,12 @@ class Question(models.Model):
     title = models.CharField(max_length=255)
     text = models.TextField()
     added_at = models.DateTimeField(default=timezone.now)
-    rating = models.IntegerField()
-    author = models.ManyToManyField(User)
+    rating = models.IntegerField(default=0)
+    author = models.OneToOneField(User)
     likes = models.ManyToManyField(User, related_name="likes")
 
 class Answer(models.Model):
     text = models.TextField()
-    added_at = models.DateTimeField()
+    added_at = models.DateTimeField(default=timezone.now)
     question = models.OneToOneField(Question)
     author = models.OneToOneField(User)
