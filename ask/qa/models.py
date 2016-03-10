@@ -16,4 +16,4 @@ class Answer(models.Model):
     text = models.TextField()
     added_at = models.DateTimeField(default=timezone.now)
     question = models.ForeignKey(Question)
-    author = models.OneToOneField(User)
+    author = models.ForeignKey(User)
