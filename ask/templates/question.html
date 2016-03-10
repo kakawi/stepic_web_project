@@ -8,7 +8,7 @@
         <div>{{ question.title }}</div>
         <div>{{ question.text }}</div>
         {% for answer in answers %}
-                <div>{{answer}}</div>
+                <div>{{answer.text}}</div>
         {% endfor %}
     </nav>
 {% endblock %}
