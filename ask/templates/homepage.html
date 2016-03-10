@@ -4,23 +4,24 @@
 {% endblock %}
 {% block content %}
 <h2>HomePage</h2>
-
+<div>{{ fff }}</div>
     {% for question in questions %}
         <div>
             <a href="/question/{{ question.id }}/">{{ question.title }}</a>
+            <div>{{ question.text }}</div>
         </div>
     {% endfor %}
+
     <nav>
         <ul class="pagination">
             {% for p in paginator.page_range %}
-                {% if p.number == page.number %}
+                {% if p == page.number %}
                 <li class="active">
                 {% else %}
                 <li>
                 {% endif %}
-
-                    <a href="{{ paginator.baseurl }}{{ p.number }}">
-                    {{ p.number }}</a>
+                    <a href="{{ paginator.baseurl }}{{ p }}">
+                    {{ p }}</a>
                 </li>
             {% endfor %}
         </ul>

@@ -21,9 +21,9 @@ def homepage(request, *args, **kwargs):
     paginator.baseurl = '/?page='
     page = paginator.page(page)
     return render(request, 'homepage.html', {
-        questions: page.object_list,
-        paginator: paginator,
-        page: page
+        'questions': page.object_list,
+        'paginator': paginator,
+        'page': page
     })
 
 def popular(request, *args, **kwargs):
@@ -34,9 +34,9 @@ def popular(request, *args, **kwargs):
     paginator.baseurl = '/?page='
     page = paginator.page(page)
     return render(request, 'popular.html', {
-        questions: page.object_list,
-        paginator: paginator,
-        page: page
+        'questions': page.object_list,
+        'paginator': paginator,
+        'page': page
     })
 
 def question(request, id):
@@ -46,5 +46,5 @@ def question(request, id):
         raise Http404
 
     return render(request, 'question.html', {
-        question: question,
+        'question': question,
     })
