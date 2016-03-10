@@ -1,3 +1,5 @@
+from django.utils import timezone
+
 from django.db import models
 from django.contrib.auth.models import User
 
@@ -5,7 +7,7 @@ from django.contrib.auth.models import User
 class Question(models.Model):
     title = models.CharField(max_length=255)
     text = models.TextField()
-    added_at = models.DateTimeField()
+    added_at = models.DateTimeField(default=timezone.now)
     rating = models.IntegerField()
     author = models.OneToOneField(User, related_name='author_id')
     likes = models.ManyToManyField(User)
