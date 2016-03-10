@@ -15,5 +15,5 @@ class Question(models.Model):
 class Answer(models.Model):
     text = models.TextField()
     added_at = models.DateTimeField(default=timezone.now)
-    question = models.ManyToManyField(Question)
+    question = models.OneToOneField(Question)
     author = models.OneToOneField(User)
