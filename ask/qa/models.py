@@ -9,7 +9,7 @@ class Question(models.Model):
     text = models.TextField()
     added_at = models.DateTimeField(default=timezone.now)
     rating = models.IntegerField(default=0)
-    author = models.OneToOneField(User)
+    author = models.ForeignKey(User)
     likes = models.ManyToManyField(User, related_name="likes")
 
 class Answer(models.Model):
