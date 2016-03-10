@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block title %}
+    Popular
+{% endblock %}
+{% block content %}
+<h2>Popular</h2>
+    {% for question in questions %}
+        <div>
+            <a href="/question/{{ question.id }}/">{{ question.title }}</a>
+        </div>
+    {% endfor %}
+    <nav>
+        <ul class="pagination">
+            {% for p in paginator.page_range %}
+                {% if p.number == page.number %}
+                <li class="active">
+                {% else %}
+                <li>
+                {% endif %}
+                    <a href="{{ paginator.baseurl }}{{ p.number }}">
+                    {{ p.number }}</a>
+                </li>
+            {% endfor %}
+        </ul>
+    </nav>
+{% endblock %}

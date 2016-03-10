@@ -10,6 +10,7 @@ https://docs.djangoproject.com/en/1.7/ref/settings/
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
+from os.path import join
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
 
@@ -61,8 +62,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'django_ask',
-        'USER': 'umysql_user',
-        'PASSWORD': 'mysql_user',
+        'USER': 'mysql_user',
+        'PASSWORD': 'Qa4kT2e4XC',
         'HOST': '127.0.0.1',
         'PORT': '3306',
     }
@@ -86,3 +87,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.7/howto/static-files/
 
 STATIC_URL = '/static/'
+
+TEMPLATE_DIRS = (
+    join(BASE_DIR,  'templates'),
+)
