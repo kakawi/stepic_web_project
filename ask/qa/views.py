@@ -8,6 +8,8 @@ from django.shortcuts import render
 
 from qa.models import Question
 
+from qa.models import Answer
+
 
 def test(request, *args, **kwargs):
     return HttpResponse('OK')
@@ -42,9 +44,11 @@ def popular(request, *args, **kwargs):
 def question(request, id):
     try:
         question = Question.objects.get(id=id)
+        answers = question.answer_set.all()
     except Question.DoesNotExist:
         raise Http404
 
     return render(request, 'question.html', {
         'question': question,
+        'answers': answers,
     })
