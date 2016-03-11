@@ -1,5 +1,5 @@
 from django.core.paginator import Paginator
-from django.http import Http404
+from django.http import Http404, HttpResponseRedirect
 from django.shortcuts import render
 
 
@@ -9,6 +9,8 @@ from django.shortcuts import render
 from qa.models import Question
 
 from qa.models import Answer
+
+from qa.forms import AskForm, AnswerForm
 
 
 def test(request, *args, **kwargs):
@@ -45,10 +47,33 @@ def question(request, id):
     try:
         question = Question.objects.get(id=id)
         answers = question.answer_set.all()
+
+        if request.method == "POST":
+            form = AnswerForm(request.POST)
+            if form.is_valid():
+                answer = form.save()
+                url = question.get_url()
+                return HttpResponseRedirect(url)
+        else:
+            form = AnswerForm()
     except Question.DoesNotExist:
         raise Http404
 
     return render(request, 'question.html', {
         'question': question,
         'answers': answers,
+        'form': form,
+    })
+
+def ask_form(request):
+    if request.method == "POST":
+        form = AskForm(request.POST)
+        if form.is_valid():
+            question = form.save()
+            url = question.get_url()
+            return HttpResponseRedirect(url)
+    else:
+        form = AskForm()
+    return render(request, 'ask_form.html', {
+        'form': form
     })

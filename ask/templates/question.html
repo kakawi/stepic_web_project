@@ -4,11 +4,17 @@
 {% endblock %}
 {% block content %}
 <h2>Question ID</h2>
-    <nav>
-        <div>{{ question.title }}</div>
-        <div>{{ question.text }}</div>
-        {% for answer in answers %}
-                <div>{{answer.text}}</div>
-        {% endfor %}
-    </nav>
+
+<div>{{ question.title }}</div>
+<div>{{ question.text }}</div>
+{% for answer in answers %}
+        <div>{{answer.text}}</div>
+{% endfor %}
+
+
+<form action="/question/{{ question.pk }}/" method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Save</button>
+</form>
 {% endblock %}

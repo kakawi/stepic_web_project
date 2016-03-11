@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block title %}
+    Popular
+{% endblock %}
+{% block content %}
+<h2>Ask Form</h2>
+<form action="/ask/" method="post">
+    {% csrf_token %}
+    {{ form.as_p}}
+    <button type="submit">Save</button>
+</form>
+{% endblock %}
