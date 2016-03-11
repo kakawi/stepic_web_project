@@ -3,10 +3,10 @@
     Popular
 {% endblock %}
 {% block content %}
-<h2>Ask Form</h2>
-<form action="/ask/" method="post">
+<h2>Login</h2>
+<form action="/login/" method="post">
     {% csrf_token %}
     {{ form.as_p }}
-    <button type="submit">Save</button>
+    <button type="submit">Enter</button>
 </form>
 {% endblock %}

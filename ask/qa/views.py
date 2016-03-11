@@ -1,6 +1,8 @@
 from django.core.paginator import Paginator
 from django.http import Http404, HttpResponseRedirect
 from django.shortcuts import render
+from django.contrib.auth import authenticate, login as auth_login
+from django.core.urlresolvers import reverse
 
 
 # Create your views here.
@@ -10,7 +12,11 @@ from qa.models import Question
 
 from qa.models import Answer
 
-from qa.forms import AskForm, AnswerForm
+from qa.forms import AskForm
+from qa.forms import AnswerForm
+from qa.forms import SignUpForm
+from qa.forms import LoginForm
+
 
 
 def test(request, *args, **kwargs):
@@ -50,6 +56,7 @@ def question(request, id):
 
         if request.method == "POST":
             form = AnswerForm(request.POST)
+            form._user = request.user
             if form.is_valid():
                 answer = form.save()
                 url = question.get_url()
@@ -68,6 +75,7 @@ def question(request, id):
 def ask_form(request):
     if request.method == "POST":
         form = AskForm(request.POST)
+        form._user = request.user
         if form.is_valid():
             question = form.save()
             url = question.get_url()
@@ -75,5 +83,37 @@ def ask_form(request):
     else:
         form = AskForm()
     return render(request, 'ask_form.html', {
+        'form': form
+    })
+
+def sign_up(request):
+    if request.method == "POST":
+        form = SignUpForm(request.POST)
+        if form.is_valid():
+            username = request.POST['username']
+            password = request.POST['password']
+            form.save()
+            user = authenticate(username=username, password=password)
+            auth_login(request, user)
+            return HttpResponseRedirect(reverse('homepage'))
+    else:
+        form = SignUpForm()
+    return render(request, 'sign_up.html', {
+        'form': form
+    })
+
+
+def login(request):
+    if request.method == "POST":
+        form = LoginForm(request.POST)
+        if form.is_valid():
+            username = request.POST['username']
+            password = request.POST['password']
+            user = authenticate(username=username, password=password)
+            auth_login(request, user)
+            return HttpResponseRedirect(reverse('homepage'))
+    else:
+        form = LoginForm()
+    return render(request, 'login.html', {
         'form': form
     })
